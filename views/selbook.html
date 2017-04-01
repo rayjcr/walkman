@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title></title>
+
+	</head>
+	<body>
+		<div class="view grayBg"  ng-class='{"sellayer":islayer}'>
+			<div class="header">
+				<div class="back-btn"  ng-click="GoBack()"><i class="icon-angle-left"></i></div>
+				<div class="sel-textbook" ng-click="popselbook()" >{{selJcV}} <i class="icon-caret-down"></i> </div>
+				<div class="playStat" ng-class="{'playing':isplay}"></div>
+			</div>
+			<div class="selBookLayer" ng-class='{"sellayer":islayer}'>
+				<li ng-repeat="jcV in jcVersion" ng-click="selVersion(jcV.SubTree,jcV)">
+					{{jcV.TreeName}}
+				</li>	
+			</div>
+			<div id="wrapper">
+				
+				<div class="scroller">
+					<div class="pb30">
+						<div class="bookCol clear" >	
+							<div ng-repeat="jcB in jcBooks" repeat-done="doIScroll()"  class="bookCover">								
+									<div ng-click="selBook(jcB)"><img ng-src="http://reding.91118.com/{{jcB.Path}}/_book.jpg">
+									</div>
+									<span class="njinfo">{{jcB.TreeName}}</span>
+
+							</div>	
+						</div>
+					</div>
+				</div>
+			</div>
+		
+		</div>	
+		
+		<!--ui-sref="selunit({id:jcB})"-->
+	</body>
+</html>
+
+
+
+
+

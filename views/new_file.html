@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			/*这里是闪烁光标*/
+			.cursor.blink {
+			    animation: blink 1s infinite steps(1, start);
+			}
+			/*这里设置动画blink*/
+			@keyframes blink {
+			    0%, 100% {
+			        background-color: #000;
+			        color: #aaa;
+			    }
+			    50% {
+			        background-color: #bbb; /* not #aaa because it's seem there is Google Chrome bug */
+			        color: #000;
+			    }
+			}
+		</style>
+	</head>
+	<body>
+		<div style="width:400px; height:40px; border:1px solid #e6e6e6; margin-top: 40px; margin-left: 40px;">
+			<span class="cursor blink"><span>
+		</div>
+			
+			
+	</body>
+</html>

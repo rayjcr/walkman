@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title></title>
+	</head>
+	<body>
+		<div class="blurBg"><img ng-src="http://reding.91118.com/{{bookTree.Path}}/_bookV.jpg"></div>
+		<div class="view" ng-class='{"sellayer":islayer}'>
+			<div class="header-play noline">
+				<div class="back-btn" ng-click="GoBack()"><i class="icon-angle-left"></i></div>
+				<div class="h-tit">{{bookTree.TreeName}}</div>
+				<div class="playStatB" ng-click="GoTo('play')" ng-show="{{UnitTree.length>0}}" ng-class="{'playing':isplay}"></div>
+			</div>
+			
+			<div class="bookStat" >
+				<div class="bookDown"><img ng-src="http://reding.91118.com/{{bookTree.Path}}/_book.jpg">
+					<div class="progressContainer" style="display:none">
+   						<canvas width="100%" height="auto">对不起，您的浏览器不支持canvas</canvas>
+					</div>
+					<a class="sel-btn" ui-sref="selbook()" ng-class='{"keypage":!isCurTab}'><em>换课本</em></a>
+				</div>
+			</div>
+			
+			<div class="selPageBtn" ng-hide="isPageUnit" ng-click="selPageFun()"></div>
+			
+			<div class="wrapper"  ng-class='{"wrapTop":isScroll&&!isPageUnit,"keypage":!isCurTab}'>
+						
+				<!--
+				<div class="unitTabBox">
+					<div class="tabbox" ng-class="{'active':isCurTab}" ng-click="changeTab(0)"><span>课文目录</span></div>
+					<div class="tabbox" ng-class="{'active':!isCurTab}" ng-click="changeTab(1)"><span>页码区间</span></div>
+				</div>
+				-->
+				
+				<div class="unitFun">
+					<div class="unitPlayAll" ng-hide="isCusSel" >
+						课文目录 <span>(共{{UnitSum}}单元)</span>
+					</div>
+					<div class="selUnitAll" ng-class="{allSel:isSelAll}" ng-show="isCusSel" ng-click="SelAll()">全部选择</div>
+					<div class="selmulti" ng-click="CusSel()" ng-class="{selsingle:isCusSel}">{{CusSelValue||"多选"}}</div>
+				</div>	
+				
+				<div class="unitContList">
+
+					<div class="rollunit" ng-show="isCurTab">
+						
+							
+						<div class="unitList" ng-class="{cusSel:isCusSel}">
+							
+							<dl ng-repeat="module in listUnit">
+								<dt ng-if="module.hasSub||true" ng-show="{{isModule}}" data-id="{{$index}}"><div class="unitTit">{{module.TreeName}}</div></dt>
+								<dd  ng-repeat="unit in module.SubTree"  ng-class="{'selUnit':unit.IsSelectUnit}" data-id="{{$index}}" ng-click="clickUnit($event)"><div   class="unitTit">{{unit.TreeName}}</div></dd>
+							</dl>
+			
+						</div>	
+					</div>
+							
+				</div>
+			</div>
+			
+			<!--页码选择弹层-->
+			<div class="pageunit"  ng-show="isPageUnit">
+				<div class="mask"></div>
+				
+				<div class="SelPageBox clear" ng-class="{'on':isPageUnit}">
+					<div class="SelPageClose" ng-click="isPageUnit=false"></div>
+					<div class="selPageTit">
+						页码区间 (页) <span>可选区间为({{pageArea[0]}}-{{pageArea[1]}})</span>
+					</div>
+					<div class="inSelPage">
+						<div class="startPage curpage" ng-click="selPage($event)" ng-class="{'err':isStartErr}"></div>
+						<div class="pageSpilt"></div>
+						<div class="endPage" ng-click="selPage($event)" ng-class="{'err':isEndErr}"></div>
+					</div>
+					
+					<div class="NumKeyBox" ng-if="isPageUnit">
+						<div class="NumKeyOpt">
+							<button class="selComplete" ng-click="pagePlay()">完成</button>
+						</div>
+						<div class="KeyMain">
+							<dl class="keynumlists">
+								<dd ng-touchstart="keyin(1)">1</dd>
+								<dd ng-touchstart="keyin(2)">2</dd>
+								<dd ng-touchstart="keyin(3)">3</dd>
+								<dd ng-touchstart="keyin(4)">4</dd>
+								<dd ng-touchstart="keyin(5)">5</dd>
+								<dd ng-touchstart="keyin(6)">6</dd>
+								<dd ng-touchstart="keyin(7)">7</dd>
+								<dd ng-touchstart="keyin(8)">8</dd>
+								<dd ng-touchstart="keyin(9)">9</dd>
+								<dt></dt>
+								<dd ng-touchstart="keyin(0)">0</dd>
+								<dt class="keydel" ng-touchstart="keydel()"></dt>
+							</dl>
+						</div>
+					</div>
+		
+					
+				</div>
+				
+			</div>
+			
+		
+		
+		</div>
+		
+		
+		<div class="selOk" ng-if="isCusSel&&isCurTab&&(!isPageUnit)" ng-show="selsum>0" ng-click="playAll()">开始播放({{selsum}})</div>
+		
+	
+		<!--<div id='tipslayer'>输入页面小于当前最小值</div>-->
+		
+		
+	</body>
+</html>

@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title></title>
+	</head>
+	<body>
+		<div class="blurBg"><img ng-src="http://reding.91118.com/{{bookTree.Path}}/_bookV.jpg"></div>
+		<div class="view">
+			
+			<div class="header-play">
+				<div class="back-btn"  ng-click="GoBack()"><i class="icon-angle-left"></i></div>
+				<div class="h-tit" rolltit="{{CurTitle}}"></div>
+				<div class="opt-btn" ng-click="GoTo('selunit')"></div>
+			</div>
+			
+			<div id="playtab" class="mainPlay" ng-class='{"playscale":isScale,"playing":isplay,"pause":!isplay,"tabhide":!isDisc}'>
+				<div class="playRod"></div>
+				
+				<div class="discsList">
+					<div class="swiper-wrapper">
+						<!--<div class="swiper-slide">
+							<div class="discsBox" >
+								<div class="discMidBox">
+									<div class="discBg"></div>
+									<div class="discMask">
+										<img ng-src="http://reding.91118.com/{{bookTree.Path}}/_book.jpg">
+									</div>	
+								</div>
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="discsBox" >
+								<div class="discMidBox">
+									<div class="discBg"></div>
+									<div class="discMask">
+										<img ng-src="http://reding.91118.com/{{bookTree.Path}}/_book.jpg">
+									</div>	
+								</div>
+							</div>
+						</div>-->
+						<div class="swiper-slide">
+							<div class="discsBox" >
+								<div class="discMidBox">
+									<div class="discBg"></div>
+									<div class="discMask">
+										<img ng-src="http://reding.91118.com/{{bookTree.Path}}/_book.jpg">
+									</div>	
+								</div>
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="discsBox" >
+								<div class="discMidBox">
+									<div class="discBg"></div>
+									<div class="discMask">
+										<img ng-src="http://reding.91118.com/{{bookTree.Path}}/_book.jpg">
+									</div>	
+								</div>
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="discsBox" >
+								<div class="discMidBox">
+									<div class="discBg"></div>
+									<div class="discMask">
+										<img ng-src="http://reding.91118.com/{{bookTree.Path}}/_book.jpg">
+									</div>	
+								</div>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+	
+				
+			</div>
+			
+			<div id="lyrtab" class="lyrMainBox" ng-class='{"tabshow":!isDisc}'}'>
+				<div id="lyricsBox" class="lyricsBox">
+					<div id="lyricsMain" class="lyricsMain"  style="transform:translateZ(0px) translateY({{translateY}}px);">
+                        <p ng-repeat="sj in shijianshuzu" data-time="{{sj}}" ng-class="{'blank':gecishuzu[$index].length==0}"  class='lrcitem'><span  class='real_lyr'>{{gecishuzu[$index]}}</span></p>
+					</div>
+				</div>
+			</div>
+			
+			<div class="controlMain">
+				<div class="progressMain">
+					<div class="passTime">{{curTime||'00:00'}}</div>
+					<div class="progressBar">
+						<div class="progressLine">
+							<div id="progressing" class="progressing" style="width:{{curProgress||0}}%;">
+								<div id="progressDot" class="progressDot"></div>
+							</div>
+						</div>
+					</div>
+					<div class="sumTime">{{sumTime||'00:00'}}</div>
+				</div>	
+				
+				<div class="controlBox">
+					<div class="ctrl_xh" ng-click="IsLoop()" ng-class="{'xh_1':tloop}"></div>
+					
+					<div class="ctrl-v">
+						<div class="ctrl_prev" ng-click="ctrl_prev()" ></div>
+						<div id="vplay" ng-class='{"pause":isplay,"play":!isplay}' class="defaultplay"></div>
+						<div class="ctrl_next" ng-click="ctrl_next()"></div>
+					</div>
+					
+					<div class="ctrl_opt" ng-click="showPlayList()"></div>
+				</div>
+				
+				
+			</div>
+		</div>
+		
+		<div class="playList" ng-class="{'active':isshowplaylist&&islayer}">
+				<div class="playlistTop"><span>播放列表</span><span class="clearAll" ng-click="ClearUnitTree()" >清空</span></div>
+				<div class="playListCont">
+					<dl class="playContLists" ng-repeat="tree in units">
+						<dt ng-show="{{isModule}}">{{tree.TreeName}}<em ng-click="delMusic($index)"></em></dt>
+						<div ng-repeat="unit in tree.SubTree">
+						<dt >{{unit.TreeName}}<em ng-click="delMusic($parent.$index,$index)"></em></dt>
+						<dd ng-class="{'curplay':iscurplay($parent.$parent.$index,$parent.$index,$index)}" ng-repeat="page in unit.SubTree" ng-click="playSelMusic($parent.$parent.$index,$parent.$index,$index)">{{page.TreeName}}<em ng-click="delMusic($parent.$parent.$index,$parent.$index,$index)"></em></dd>
+						</div>
+					</dl>
+				</div>
+				
+				<div class="closePlist" ng-click="closePlayList()">关闭</div>	
+		</div>
+	</body>
+</html>
